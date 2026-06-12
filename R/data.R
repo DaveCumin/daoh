@@ -21,9 +21,8 @@
 
 #' Synthetic patient example: multiple admissions and death
 #'
-#' Reproduces the worked example from Figure 1 of Cumin et al. A patient
-#' with four hospital admissions who dies 8 days after the last discharge,
-#' within a 30-day follow-up period. Illustrates all seven DAOH variants.
+#' A patient with four hospital admissions who dies 8 days after the last 
+#' discharge, within a 30-day follow-up period. Illustrates all seven DAOH variants.
 #'
 #' @format A list with two data.frames:
 #' \describe{

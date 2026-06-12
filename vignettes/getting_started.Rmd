@@ -1,6 +1,6 @@
 ---
 title: "Getting started with the daoh package"
-author: "Cumin et al."
+author: "David Cumin"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Getting started with the daoh package}
@@ -15,8 +15,7 @@ library(daoh)
 
 ## Overview
 
-The `daoh` package implements the methodological framework described in
-Cumin et al. [PAPER TO COME] for calculating
+The `daoh` package  calculates
 **Days Alive and Out of Hospital (DAOH)** from administrative
 admission/discharge/mortality records.
 
@@ -63,8 +62,7 @@ of distinct hospital episodes per patient.
 
 ## Example 2 — Death handling
 
-This example reproduces the worked example from Figure 1 of the paper:
-a patient with four admissions who dies within the 30-day follow-up period.
+A patient with four admissions who dies within the 30-day follow-up period.
 
 ```{r example2}
 ex2 <- load_example("death")
@@ -142,8 +140,6 @@ plot_daoh_dist(res_n, title = "DAOH – Nights algorithm, 90-day period")
 ---
 
 ## Recommended reporting
-
-Based on Cumin et al. we recommend:
 
 1. **Nights algorithm** when exact timestamps are unavailable or unreliable.
 2. **No death=0 weighting** — credits pre-death days and avoids distribution distortion.

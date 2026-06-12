@@ -1,7 +1,7 @@
 #' Plot the distribution of DAOH scores
 #'
 #' Produces a histogram of DAOH scores (as percentage) with deaths
-#' overlaid in a contrasting colour, matching Figure 2 of Cumin et al.
+#' overlaid in a contrasting colour.
 #' The y-axis is log-scaled to aid visualisation of the bimodal
 #' distribution.
 #'

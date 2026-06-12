@@ -2,7 +2,7 @@
 
 **R package for calculating Days Alive and Out of Hospital (DAOH)**
 
-Implements the methods described in Cumin et al. [PAPER TO COME]. Supports all three hospital-time algorithms (nights, days,
+Supports all three hospital-time algorithms (nights, days,
 exact) and all three death-handling approaches (midday, midnight, zero), with
 tools for comparison, and visualisation.
 
@@ -56,4 +56,3 @@ See `vignette("getting_started", package = "daoh")` for a full walkthrough.
 
 ## Citation
 
-Cumin ... [PAPER TO COME]
