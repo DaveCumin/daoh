@@ -2,8 +2,8 @@
 #'
 #' A minimal example designed to illustrate the difference between the
 #' 'nights' and 'days' algorithms for a same-day (day-stay) admission.
-#' Under 'nights' the patient contributes 0 nights → DAOH = 30.
-#' Under 'days' the patient contributes 1 day → DAOH = 29.
+#' Under 'nights' the patient contributes 0 nights (DAOH = 30).
+#' Under 'days' the patient contributes 1 day (DAOH = 29).
 #'
 #' @format A list with two data.frames:
 #' \describe{

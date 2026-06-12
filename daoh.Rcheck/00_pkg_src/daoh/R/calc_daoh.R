@@ -17,7 +17,7 @@
 #' }
 #'
 #' Overlapping hospital events are merged using a 12-hour gap tolerance before
-#' summing: any two admissions separated by ≤ 12 hours are treated as a
+#' summing: any two admissions separated by <= 12 hours are treated as a
 #' single continuous episode. This removes double-counting and models the
 #' clinical reality that rapid re-admissions represent continuous care.
 #'

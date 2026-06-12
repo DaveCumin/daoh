@@ -33,7 +33,7 @@ daoh_summary <- function(results_list, quantiles = c(0.10, 0.25, 0.50)) {
 #'
 #' Computes the mean difference, standard deviation of differences, and
 #' 95% limits of agreement between two DAOH vectors (matched by
-#' patientID × indexDate).
+#' patientID x indexDate).
 #'
 #' @param res_a,res_b data.frames (output of [calc_daoh()]) for two methods.
 #'   Must have columns `patientID`, `indexDate`, `daoh`.
@@ -76,7 +76,7 @@ bland_altman_daoh <- function(res_a, res_b, use_pc = TRUE) {
 #' \pkg{irr} package.
 #'
 #' @param results_list Named list of data.frames (output of [calc_daoh()]).
-#'   All elements must share the same patientID × indexDate pairs.
+#'   All elements must share the same patientID x indexDate pairs.
 #' @param use_pc Logical. Use `daohPC` (default `TRUE`) or `daoh`.
 #' @return The output of [irr::icc()] for the combined method matrix.
 #' @export

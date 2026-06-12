@@ -2,10 +2,11 @@
 ** this is package ‘daoh’ version ‘0.1.0’
 ** using staged installation
 ** R
+** data
+*** moving datasets to lazyload DB
 ** inst
 ** byte-compile and prepare package for lazy loading
 ** help
-No man pages found in package  ‘daoh’ 
 *** installing help indices
 ** building package indices
 ** installing vignettes

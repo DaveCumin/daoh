@@ -1,0 +1,27 @@
+bland_altman_daoh       Bland-Altman statistics for two DAOH variants
+calc_daoh               Calculate Days Alive and Out of Hospital (DAOH)
+daoh_icc                Intraclass Correlation Coefficient across DAOH
+                        methods
+daoh_reclassify         Quartile reclassification across two DAOH
+                        methods
+daoh_reclassify_centile
+                        Centile-boundary reclassification across two
+                        DAOH methods
+daoh_summary            Compute DAOH summary statistics across all
+                        methods and periods
+example_daystay         Synthetic patient example: single day-stay
+                        admission
+example_death           Synthetic patient example: multiple admissions
+                        and death
+example_population      Synthetic population: 500 patients, mixed
+                        admission patterns
+hospital_time           Convert admission/discharge date pairs to
+                        numeric time intervals
+load_example            Load a built-in example dataset
+merge_intervals         Merge overlapping or near-adjacent time
+                        intervals
+plot_daoh_ba            Plot a Bland-Altman comparison of two DAOH
+                        methods
+plot_daoh_dist          Plot the distribution of DAOH scores
+plot_daoh_reclassify    Visualise quartile reclassification between two
+                        DAOH methods

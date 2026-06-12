@@ -12,15 +12,16 @@ Description: Calculates Days Alive and Out of Hospital (DAOH) from administrativ
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
 Imports:
-    lubridate (>= 1.9.0),
-    ggplot2 (>= 3.4.0)
+    ggplot2 (>= 3.4.0),
+    scales
 Suggests:
     testthat (>= 3.0.0),
     knitr,
     rmarkdown,
     irr
+LazyData: true
 VignetteBuilder: knitr
 URL: https://github.com/davecumin/daoh
 BugReports: https://github.com/davecumin/daoh/issues
+Config/roxygen2/version: 8.0.0

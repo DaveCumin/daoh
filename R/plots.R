@@ -76,7 +76,7 @@ plot_daoh_ba <- function(ba_result, method_a = "Method A",
     ggplot2::labs(
       title = paste("Bland-Altman:", method_a, "vs", method_b),
       x = paste0("Mean (", method_a, " + ", method_b, ") / 2 (%)"),
-      y = paste0("Difference (", method_a, " − ", method_b, ") (%)"),
+      y = paste0("Difference (", method_a, " - ", method_b, ") (%)"),
       caption = sprintf("Mean diff = %.2f%%; 95%% LoA: %.2f%% to %.2f%%",
                         md, loa[1], loa[2])
     ) +
