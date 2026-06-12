@@ -55,4 +55,4 @@ Three synthetic datasets are included:
 See `vignette("getting_started", package = "daoh")` for a full walkthrough.
 
 ## Citation
-
+DOI: 10.5281/zenodo.20671491
