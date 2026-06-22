@@ -1,0 +1,47 @@
+# daoh 0.2.0
+
+## Performance
+
+* `calc_daoh()` now uses a fully vectorised `data.table` pipeline instead of
+  an R-level loop over patients. The key changes:
+  - `foverlaps()` matches admissions to index periods in a single C-level pass,
+    correctly handling patients with multiple index dates.
+  - Interval merging uses a one-pass cumulative-max sweep (`ave()`) rather than
+    a sequential R loop per patient, giving O(n log n) overall complexity.
+  - Dead time and DAOH are computed by vectorised arithmetic over all patients
+    simultaneously.
+  - All column assignments use `data.table::set()` (no `:=`), which avoids
+    `data.table`'s `cedta()` namespace check and works correctly under both
+    `devtools::load_all()` and a standard package install.
+* `data.table (>= 1.14.0)` added to `Imports`.
+
+## Bug fixes
+
+* Fixed a latent issue where `min(dod)` on an empty group (all patients
+  alive) could emit a spurious "no non-missing arguments" warning.
+
+---
+
+# daoh 0.1.0
+
+* Initial CRAN release.
+* `calc_daoh()`: calculates DAOH for one or more patients given a
+  `data.frame` of admissions and a `data.frame` of index dates.
+  Supports three hospital-time algorithms (`nights`, `days`, `exact`) and
+  three death-handling methods (`midday`, `midnight`, `zero`).
+  A configurable gap tolerance (default 12 h) merges near-adjacent admissions
+  before summing hospital time.
+* `hospital_time()`: converts admission/discharge date pairs to numeric
+  intervals under the chosen algorithm.
+* `dead_time()`: calculates dead days within a follow-up period.
+* `merge_intervals()`: merges overlapping or near-adjacent intervals with a
+  configurable gap tolerance. Exported for direct use.
+* `daoh_summary()`: summary statistics (mean, SD, percentiles) across a list
+  of `calc_daoh()` results.
+* `bland_altman_daoh()` / `plot_daoh_ba()`: Bland–Altman agreement analysis
+  and plot comparing two sets of DAOH values.
+* `daoh_icc()`: intraclass correlation coefficient between two DAOH vectors.
+* `daoh_reclassify()` / `daoh_reclassify_centile()` / `plot_daoh_reclassify()`:
+  centile-based reclassification analysis and plot.
+* `plot_daoh_dist()`: distribution plot for a single set of DAOH values.
+* `load_example()`: loads the bundled example dataset.

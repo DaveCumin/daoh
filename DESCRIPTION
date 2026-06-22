@@ -1,7 +1,7 @@
 Package: daoh
 Type: Package
 Title: Days Alive and Out of Hospital (DAOH) Calculation
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person("David", "Cumin", email = "d.cumin@auckland.ac.nz", role = c("aut", "cre"))
   )
@@ -13,6 +13,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports:
+    data.table (>= 1.14.0),
     ggplot2 (>= 3.4.0),
     scales
 Suggests:
