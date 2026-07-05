@@ -1,3 +1,34 @@
+# daoh 0.2.1
+
+## Bug fixes
+
+* **Timezone handling for `POSIXct` inputs.** Two related defects affected the
+  `exact` method (and any `POSIXct` input) on machines whose local timezone is
+  not UTC:
+  - `as.Date()` on `POSIXct` converts via UTC, so local times earlier than the
+    UTC offset (e.g. mornings in New Zealand) were assigned to the *previous*
+    calendar day. This shifted index dates and admission/discharge dates.
+  - `hospital_time()` measured `exact` intervals from the origin at 00:00 UTC,
+    offsetting every value by the local UTC offset (about half a day in NZ)
+    relative to the whole-day numbers used for the index-date period windows,
+    which misaligned all interval clipping at period boundaries.
+
+  Both now use the input's local calendar date (plus local clock-time fraction
+  for `exact`). Results from `Date` inputs are unchanged. Results for
+  `POSIXct` inputs in non-UTC timezones will change — they were previously
+  wrong.
+
+## Tests
+
+* Corrected two test expectations: `calc_daoh()` returns one row per index
+  date (with `daoh = period`) when there are no admissions, and the
+  nights-vs-days systematic difference equals the *days* episode count
+  (same-day stays contribute zero nights, so the nights method does not count
+  them as episodes).
+* Added a regression test for local-timezone handling of `POSIXct` inputs.
+
+---
+
 # daoh 0.2.0
 
 ## Performance

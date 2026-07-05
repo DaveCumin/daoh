@@ -131,6 +131,17 @@ calc_daoh <- function(events, index_dates,
 
   origin_date <- as.Date(origin)
 
+  # as.Date() on POSIXct converts via UTC by default, which shifts any local
+  # time earlier than the UTC offset (e.g. NZ mornings) onto the previous
+  # calendar day. format() respects the input's timezone.
+  local_date <- function(x) {
+    if (inherits(x, "POSIXct") || inherits(x, "POSIXlt")) {
+      as.Date(format(x, "%Y-%m-%d"))
+    } else {
+      as.Date(x)
+    }
+  }
+
   # ── Empty-input fast path ─────────────────────────────────────────────────
   empty_out <- data.frame(
     patientID  = character(), indexDate  = as.Date(character()),
@@ -146,8 +157,8 @@ calc_daoh <- function(events, index_dates,
   idx_dt <- data.table::data.table(
     row_id    = seq_len(nrow(index_dates)),
     patientID = as.character(index_dates$patientID),
-    indexDate = as.Date(index_dates$indexDate),
-    idx_num   = as.numeric(as.Date(index_dates$indexDate) - origin_date)
+    indexDate = local_date(index_dates$indexDate),
+    idx_num   = as.numeric(local_date(index_dates$indexDate) - origin_date)
   )
   # Use set() — avoids data.table's cedta() check (triggered only by :=)
   data.table::set(idx_dt, j = "period_end_num",
@@ -156,7 +167,7 @@ calc_daoh <- function(events, index_dates,
   # ── DOD per patient: first non-NA date of death found in events ───────────
   dod_dt <- data.table::data.table(
     patientID = as.character(events$patientID),
-    dod       = as.Date(events$dod)
+    dod       = local_date(events$dod)
   )
   dod_dt <- dod_dt[!is.na(dod)]
   # Guard the grouped min(): when no events carry a death date the filtered

@@ -1,7 +1,7 @@
 Package: daoh
 Type: Package
 Title: Days Alive and Out of Hospital (DAOH) Calculation
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("David", "Cumin", email = "d.cumin@auckland.ac.nz", role = c("aut", "cre"))
   )
