@@ -29,6 +29,18 @@ daoh_summary <- function(results_list, quantiles = c(0.10, 0.25, 0.50)) {
 }
 
 
+## Internal: fast keyed join shared by the comparison functions. Base R
+## merge() dominates runtime on multi-million-row inputs; data.table's merge
+## is an order of magnitude faster and returns the same rows (row order may
+## differ, which none of the downstream statistics depend on).
+merge_pair <- function(res_a, res_b, col) {
+  a <- data.table::as.data.table(res_a[, c("patientID", "indexDate", col)])
+  b <- data.table::as.data.table(res_b[, c("patientID", "indexDate", col)])
+  as.data.frame(data.table::merge.data.table(
+    a, b, by = c("patientID", "indexDate"), suffixes = c("_a", "_b")))
+}
+
+
 #' Bland-Altman statistics for two DAOH variants
 #'
 #' Computes the mean difference, standard deviation of differences, and
@@ -44,10 +56,7 @@ daoh_summary <- function(results_list, quantiles = c(0.10, 0.25, 0.50)) {
 bland_altman_daoh <- function(res_a, res_b, use_pc = TRUE) {
   col <- if (use_pc) "daohPC" else "daoh"
 
-  merged <- merge(res_a[, c("patientID", "indexDate", col)],
-                  res_b[, c("patientID", "indexDate", col)],
-                  by = c("patientID", "indexDate"),
-                  suffixes = c("_a", "_b"))
+  merged <- merge_pair(res_a, res_b, col)
 
   va <- merged[[paste0(col, "_a")]]
   vb <- merged[[paste0(col, "_b")]]
@@ -93,7 +102,10 @@ daoh_icc <- function(results_list, use_pc = TRUE) {
   for (nm in names(results_list)) {
     tmp <- results_list[[nm]][, c("patientID", "indexDate", col)]
     names(tmp)[3] <- nm
-    mat <- merge(mat, tmp, by = c("patientID", "indexDate"))
+    mat <- as.data.frame(data.table::merge.data.table(
+      data.table::as.data.table(mat),
+      data.table::as.data.table(tmp),
+      by = c("patientID", "indexDate")))
   }
 
   # Extract just the numeric columns
@@ -123,10 +135,7 @@ daoh_icc <- function(results_list, use_pc = TRUE) {
 daoh_reclassify <- function(res_a, res_b, n_groups = 4, use_pc = TRUE) {
   col <- if (use_pc) "daohPC" else "daoh"
 
-  merged <- merge(res_a[, c("patientID", "indexDate", col)],
-                  res_b[, c("patientID", "indexDate", col)],
-                  by = c("patientID", "indexDate"),
-                  suffixes = c("_a", "_b"))
+  merged <- merge_pair(res_a, res_b, col)
 
   va <- merged[[paste0(col, "_a")]]
   vb <- merged[[paste0(col, "_b")]]
@@ -214,10 +223,7 @@ daoh_reclassify_centile <- function(res_a, res_b,
 
   col <- if (use_pc) "daohPC" else "daoh"
 
-  merged <- merge(res_a[, c("patientID", "indexDate", col)],
-                  res_b[, c("patientID", "indexDate", col)],
-                  by     = c("patientID", "indexDate"),
-                  suffixes = c("_a", "_b"))
+  merged <- merge_pair(res_a, res_b, col)
 
   va <- merged[[paste0(col, "_a")]]
   vb <- merged[[paste0(col, "_b")]]

@@ -1,3 +1,15 @@
+# daoh 0.2.2
+
+## Performance
+
+* `bland_altman_daoh()`, `daoh_reclassify()`, `daoh_reclassify_centile()`,
+  and `daoh_icc()` now join their inputs with `data.table` instead of base
+  `merge()`. On multi-million-row inputs each call is roughly an order of
+  magnitude faster; results are unchanged (row order within the join may
+  differ, which the computed statistics do not depend on).
+
+---
+
 # daoh 0.2.1
 
 ## Bug fixes
